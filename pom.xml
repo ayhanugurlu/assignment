@@ -6,6 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <org.modelmapper.modelmapper.version>2.3.7</org.modelmapper.modelmapper.version>
+        <io.springfox.springfox-swagger2>2.9.2</io.springfox.springfox-swagger2>
+    </properties>
+
     <modules>
         <module>domain</module>
         <module>data</module>
@@ -16,6 +21,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
