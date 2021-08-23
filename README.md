@@ -1,6 +1,4 @@
 
-![alt text](https://travis-ci.org/ayhanugurlu/rabobankassignment.svg?branch=master "Travis Status")
-
 ## Rabobank Assignment for Authorizations Area
 
 This project contains several premade modules for you to implement your code. We hope this helps you with ´what to put
