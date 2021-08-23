@@ -16,6 +16,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/powerofattorney")
 public class PowerOfAttorneyController {
 
     private final PowerOfAttorneyService powerOfAttorneyService;
@@ -27,7 +28,7 @@ public class PowerOfAttorneyController {
             @ApiResponse(code = 500, message = "Unknown internal error")
     }
     )
-    @GetMapping("/powerofattorney/{accountNumber}/{granteeName}")
+    @GetMapping("/{accountNumber}/{granteeName}")
     public ResponseEntity<PowerOfAttorneyDto> getPowerOfAttorney(@PathVariable String accountNumber,@PathVariable String granteeName){
         return  ResponseEntity.ok(powerOfAttorneyService.getPowerOfAttorney(accountNumber,granteeName));
     }
@@ -38,7 +39,7 @@ public class PowerOfAttorneyController {
             @ApiResponse(code = 500, message = "Unknown internal error")
     }
     )
-    @GetMapping("/powerofattorney/{accountNumber}")
+    @GetMapping("/{accountNumber}")
     public ResponseEntity<List<PowerOfAttorneyDto>> getPowerOfAttorneys(@PathVariable String accountNumber){
         return  ResponseEntity.ok(powerOfAttorneyService.getPowerOfAttorneys(accountNumber));
     }
@@ -51,7 +52,7 @@ public class PowerOfAttorneyController {
             @ApiResponse(code = 500, message = "Unknown internal error")
     }
     )
-    @PostMapping("/powerofattorney")
+    @PostMapping
     public ResponseEntity<Void> createPowerOfAttorney(@Valid @RequestBody PowerOfAttorneyDto powerOfAttorneyDto){
         powerOfAttorneyService.create(powerOfAttorneyDto);
         var location = URI.create(String.format("/powerofattorney/%s/%s", powerOfAttorneyDto.getAccountNumber(),powerOfAttorneyDto.getGranteeName()));

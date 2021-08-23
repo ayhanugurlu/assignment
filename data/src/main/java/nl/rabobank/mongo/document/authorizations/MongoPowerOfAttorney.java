@@ -6,7 +6,6 @@ import nl.rabobank.mongo.document.account.MongoAccount;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Value
@@ -22,7 +21,6 @@ public class MongoPowerOfAttorney
 
     String granteeName;
     String grantorName;
-    @DBRef
     MongoAccount account;
     MongoAuthorization authorization;
 }

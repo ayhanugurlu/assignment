@@ -38,7 +38,7 @@ public class AccountController {
             @ApiResponse(code = 500, message = "Unknown internal error")
     }
     )
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Void> createAccount(@Valid @RequestBody AccountDto accountDTO) {
         accountService.create(accountDTO);
         var location = URI.create(String.format("/account/%s", accountDTO.getAccountNumber()));
