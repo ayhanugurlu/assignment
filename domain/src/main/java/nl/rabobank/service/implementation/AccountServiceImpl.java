@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto getAccount(final String accountNumber) {
-        log.debug("getAccount accountNumber %s", accountNumber);
+        log.debug("getAccount accountNumber {}", accountNumber);
         Optional<MongoAccount> mongoAccountOptional = accountRepository.findByAccountNumber(accountNumber);
         var account = mongoAccountOptional.map(mongoAccountMapper::map).orElseThrow(() -> new AccountNotFoundException(accountNumber));
         return dtoAccountMapper.map(account);
@@ -36,14 +36,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto create(final AccountDto accountDTO) {
-        log.debug("create accountNumber %s", accountDTO.getAccountNumber());
+        log.debug("create accountNumber {}", accountDTO.getAccountNumber());
         var account = dtoAccountMapper.map(accountDTO);
         var mongoAccount = saveAccount(mongoAccountMapper.map(account));
         return dtoAccountMapper.map(mongoAccountMapper.map(mongoAccount));
     }
 
     private MongoAccount saveAccount(final MongoAccount mongoAccount) {
-        log.debug("saveAccount accountNumber %s", mongoAccount.getAccountNumber());
+        log.debug("saveAccount accountNumber {}", mongoAccount.getAccountNumber());
         try {
             return accountRepository.save(mongoAccount);
         } catch (DuplicateKeyException ex) {

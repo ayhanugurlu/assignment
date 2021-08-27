@@ -35,7 +35,7 @@ public class PowerOfAttorneyServiceImpl implements PowerOfAttorneyService {
 
     @Override
     public PowerOfAttorneyDto getPowerOfAttorney(String accountNumber, String granteeName) {
-        log.debug("getPowerOfAttorney accountNumber %s granteeName %s",accountNumber,granteeName);
+        log.debug("getPowerOfAttorney accountNumber {} granteeName {}",accountNumber,granteeName);
         Optional<MongoPowerOfAttorney> mongoPowerOfAttorneyOptional = powerOfAttorneyRepository.findByAccount_AccountNumber_AndGranteeName(accountNumber,granteeName);
         return mongoPowerOfAttorneyOptional.map(mongoPowerOfAttorneyMapper::map)
                 .map(dtoPowerOfAttorneyMapper::map)
@@ -44,7 +44,7 @@ public class PowerOfAttorneyServiceImpl implements PowerOfAttorneyService {
 
     @Override
     public List<PowerOfAttorneyDto> getPowerOfAttorneys(String accountNumber) {
-        log.debug("getPowerOfAttorneys accountNumber %s",accountNumber);
+        log.debug("getPowerOfAttorneys accountNumber {}",accountNumber);
         List<MongoPowerOfAttorney> powerOfAttorneys = powerOfAttorneyRepository.findByAccount_AccountNumber(accountNumber);
         return powerOfAttorneys.stream()
                 .map(mongoPowerOfAttorneyMapper::map)
@@ -54,7 +54,7 @@ public class PowerOfAttorneyServiceImpl implements PowerOfAttorneyService {
 
     @Override
     public PowerOfAttorneyDto create(PowerOfAttorneyDto powerOfAttorneyDto) {
-        log.debug("create accountNumber %s granteeName %s",powerOfAttorneyDto.getAccountNumber(),powerOfAttorneyDto.getGranteeName());
+        log.debug("create accountNumber {} granteeName {}",powerOfAttorneyDto.getAccountNumber(),powerOfAttorneyDto.getGranteeName());
         Optional<MongoAccount> mongoAccountOptional = accountRepository.findByAccountNumber(powerOfAttorneyDto.getAccountNumber());
         var mongoAccount = mongoAccountOptional.orElseThrow(() -> new AccountNotFoundException(powerOfAttorneyDto.getAccountNumber()));
         var powerOfAttorney = dtoPowerOfAttorneyMapper.map(powerOfAttorneyDto,null);
@@ -64,7 +64,7 @@ public class PowerOfAttorneyServiceImpl implements PowerOfAttorneyService {
 
 
     private MongoPowerOfAttorney savePowerOfAttorney(MongoPowerOfAttorney mongoPowerOfAttorney){
-        log.debug("savePowerOfAttorney accountNumber %s granteeName %s",mongoPowerOfAttorney.getAccount().getAccountNumber(),mongoPowerOfAttorney.getGranteeName());
+        log.debug("savePowerOfAttorney accountNumber {} granteeName {}",mongoPowerOfAttorney.getAccount().getAccountNumber(),mongoPowerOfAttorney.getGranteeName());
         try{
             return powerOfAttorneyRepository.save(mongoPowerOfAttorney);
         }catch (DuplicateKeyException ex){
